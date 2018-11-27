@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icetech.paycenter.mapper.RequestLogDao">
+  <resultMap id="BaseResultMap" type="com.icetech.paycenter.domain.RequestLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="req_interface" jdbcType="VARCHAR" property="reqInterface" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.icetech.paycenter.domain.RequestLogWithBLOBs">
+    <result column="req_params" jdbcType="LONGVARCHAR" property="reqParams" />
+    <result column="return_result" jdbcType="LONGVARCHAR" property="returnResult" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, req_interface, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    req_params, return_result
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ice_request_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from ice_request_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.icetech.paycenter.domain.RequestLogWithBLOBs">
+    insert into ice_request_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reqInterface != null">
+        req_interface,
+      </if>
+      <if test="reqParams != null">
+        req_params,
+      </if>
+      <if test="returnResult != null">
+        return_result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reqInterface != null">
+        #{reqInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="reqParams != null">
+        #{reqParams,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="returnResult != null">
+        #{returnResult,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.icetech.paycenter.domain.RequestLogWithBLOBs">
+    update ice_request_log
+    <set>
+      <if test="reqInterface != null">
+        req_interface = #{reqInterface,jdbcType=VARCHAR},
+      </if>
+      <if test="reqParams != null">
+        req_params = #{reqParams,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="returnResult != null">
+        return_result = #{returnResult,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

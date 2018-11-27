@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icetech.transcenter.mapper.ThirdInfoDao">
+    <resultMap id="BaseResultMap" type="com.icetech.transcenter.domain.ThirdInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="secret_key" jdbcType="VARCHAR" property="secretKey"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, pid, `name`, secret_key, remark, create_time, update_time
+  </sql>
+    <select id="selectById" parameterType="com.icetech.transcenter.domain.ThirdInfo" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ice_third_info
+        <where>
+            <if test="id != null">id = #{id,jdbcType=INTEGER}</if>
+            <if test="pid != null">AND pid = #{pid,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+    <select id="selectByParkCode" resultMap="BaseResultMap">
+        select
+        iti.id, iti.pid, iti.name, iti.secret_key, iti.remark, iti.create_time, iti.update_time
+        from ice_third_info iti left join ice_third_park itp on iti.pid=itp.pid
+        where itp.park_code = #{parkCode} limit 1;
+    </select>
+    <insert id="insert" parameterType="com.icetech.transcenter.domain.ThirdInfo">
+        insert into ice_third_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="secretKey != null">
+                secret_key,
+            </if>
+
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="secretKey != null">
+                #{secretKey,jdbcType=VARCHAR},
+            </if>
+
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.icetech.transcenter.domain.ThirdInfo">
+        update ice_third_info
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="secretKey != null">
+                secret_key = #{secretKey,jdbcType=VARCHAR},
+            </if>
+
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

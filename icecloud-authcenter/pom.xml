@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>icecloud-parent</artifactId>
+        <groupId>com.icetech</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>icecloud-authcenter</artifactId>
+    <packaging>pom</packaging>
+    <description>鉴权认证中心</description>
+    <modules>
+        <module>icecloud-authcenter-client</module>
+        <module>icecloud-authcenter-server</module>
+    </modules>
+    <properties>
+        <icecloud-common-version>1.0-SNAPSHOT</icecloud-common-version>
+        <mybatis-spring-boot-version>1.3.2</mybatis-spring-boot-version>
+        <mybatisplus.version>2.1.9</mybatisplus.version>
+        <mybatisplus.spring.boot.version>1.0.5</mybatisplus.spring.boot.version>
+        <jwt.version>0.9.1</jwt.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.icetech</groupId>
+            <artifactId>icecloud-authcenter-server-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>

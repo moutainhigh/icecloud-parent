@@ -1,0 +1,36 @@
+server:
+  port: 8788
+
+spring:
+  application:
+    name: @artifactId@
+  profiles:
+    active:
+      - secure
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://icecloud-center:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+---
+spring:
+  profiles: insecure
+
+---
+spring:
+  profiles: secure
+  security:
+    user.name: "admin"
+    user.password: "admin"

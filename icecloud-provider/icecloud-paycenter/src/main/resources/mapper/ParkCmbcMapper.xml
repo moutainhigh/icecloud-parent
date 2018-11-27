@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icetech.paycenter.mapper.normalpay.ParkCmbcDao">
+  <resultMap id="BaseResultMap" type="com.icetech.paycenter.domain.ParkCmbc">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="park_code" jdbcType="VARCHAR" property="parkCode" />
+    <result column="platform_id" jdbcType="VARCHAR" property="platformId" />
+    <result column="merchant_no" jdbcType="VARCHAR" property="merchantNo" />
+    <result column="private_key" jdbcType="VARCHAR" property="privateKey" />
+    <result column="merchant_private_key_path" jdbcType="VARCHAR" property="merchantPrivateKeyPath" />
+    <result column="cmbc_public_key_path" jdbcType="VARCHAR" property="cmbcPublicKeyPath" />
+    <result column="notify_url" jdbcType="VARCHAR" property="notifyUrl" />
+    <result column="wx_app_id" jdbcType="VARCHAR" property="wxAppId" />
+    <result column="wx_app_secret" jdbcType="VARCHAR" property="wxAppSecret" />
+    <result column="wx_pay_path" jdbcType="VARCHAR" property="wxPayPath" />
+    <result column="ali_app_id" jdbcType="VARCHAR" property="aliAppId" />
+    <result column="ali_private_key" jdbcType="LONGVARCHAR" property="aliPrivateKey" />
+    <result column="ali_public_key" jdbcType="LONGVARCHAR" property="aliPublicKey" />
+    <result column="pay_channel" jdbcType="INTEGER" property="payChannel" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, park_code, platform_id, merchant_no, private_key,merchant_private_key_path,cmbc_public_key_path,notify_url,
+     wx_app_id,wx_app_secret,wx_pay_path,ali_app_id,ali_private_key,ali_public_key,pay_channel,status, update_time,
+    update_user
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ice_park_cmbc
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!--根据车场id获取聚合支付配置-->
+  <select id="selectByParkCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ice_park_cmbc
+    where park_code = #{parkCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from ice_park_cmbc
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.icetech.paycenter.domain.ParkCmbc">
+    insert into ice_park_cmbc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parkCode != null">
+        park_code,
+      </if>
+      <if test="platformId != null">
+        platform_id,
+      </if>
+      <if test="merchantNo != null">
+        merchant_no,
+      </if>
+      <if test="privateKey != null">
+        private_key,
+      </if>
+      <if test="merchantPrivateKeyPath != null">
+        merchant_private_key_path,
+      </if>
+      <if test="cmbcPublicKeyPath != null">
+        cmbc_public_key_path,
+      </if>
+      <if test="notifyUrl != null">
+        notify_url,
+      </if>
+      <if test="wxAppId != null">
+        wx_app_id,
+      </if>
+      <if test="wxAppSecret != null">
+        wx_app_secret,
+      </if>
+      <if test="wxPayPath != null">
+        wx_pay_path,
+      </if>
+      <if test="aliAppId != null">
+        ali_app_id,
+      </if>
+      <if test="aliPrivateKey != null">
+        ali_private_key,
+      </if>
+      <if test="aliPublicKey != null">
+        ali_public_key,
+      </if>
+      <if test="payChannel != null">
+        pay_channel,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parkCode != null">
+        #{parkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null">
+        #{platformId,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNo != null">
+        #{merchantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantPrivateKeyPath != null">
+        #{merchantPrivateKeyPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cmbcPublicKeyPath != null">
+        #{cmbcPublicKeyPath,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null">
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAppId != null">
+        #{wxAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAppSecret != null">
+        #{wxAppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="wxPayPath != null">
+        #{wxPayPath,jdbcType=VARCHAR},
+      </if>
+      <if test="aliAppId != null">
+        #{aliAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="aliPrivateKey != null">
+        #{aliPrivateKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aliPublicKey != null">
+        #{aliPublicKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="payChannel != null">
+        #{payChannel,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.icetech.paycenter.domain.ParkCmbc">
+    update ice_park_cmbc
+    <set>
+      <if test="parkCode != null">
+        park_code = #{parkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="platformId != null">
+        platform_id = #{platformId,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNo != null">
+        merchant_no = #{merchantNo,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        private_key = #{privateKey,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantPrivateKeyPath != null">
+        merchant_private_key_path = #{merchantPrivateKeyPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cmbcPublicKeyPath != null">
+        cmbc_public_key_path = #{cmbcPublicKeyPath,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyUrl != null">
+        notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAppId != null">
+        wx_app_id = #{wxAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAppSecret != null">
+        wx_app_secret = #{wxAppSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="wxPayPath != null">
+        wx_pay_path = #{wxPayPath,jdbcType=VARCHAR},
+      </if>
+      <if test="aliAppId != null">
+        ali_app_id = #{aliAppId,jdbcType=VARCHAR},
+      </if>
+      <if test="aliPrivateKey != null">
+        ali_private_key = #{aliPrivateKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aliPublicKey != null">
+        ali_public_key = #{aliPublicKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="payChannel != null">
+        pay_channel = #{payChannel,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

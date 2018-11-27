@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>icecloud-parent</artifactId>
+        <groupId>com.icetech</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>icecloud-provider-api</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>icecloud-paycenter-api</module>
+        <module>icecloud-datacenter-api</module>
+        <module>icecloud-cloudcenter-api</module>
+        <module>icecloud-bizcenter-api</module>
+        <module>icecloud-transcenter-api</module>
+        <module>icecloud-taskcenter-api</module>
+        <module>icecloud-authcenter-server-api</module>
+    </modules>
+    <properties>
+        <icecloud-common-version>1.0-SNAPSHOT</icecloud-common-version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.icetech</groupId>
+            <artifactId>icecloud-common</artifactId>
+            <version>${icecloud-common-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>
+</project>

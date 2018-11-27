@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icetech.paycenter.mapper.autopay.AutopayOrderDao">
+  <resultMap id="BaseResultMap" type="com.icetech.paycenter.domain.autopay.AutopayOrder">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="park_code" jdbcType="VARCHAR" property="parkCode" />
+    <result column="order_num" jdbcType="VARCHAR" property="orderNum" />
+    <result column="plate_num" jdbcType="VARCHAR" property="plateNum" />
+    <result column="enter_time" jdbcType="DATE" property="enterTime" />
+    <result column="exit_time" jdbcType="DATE" property="exitTime" />
+    <result column="is_open" jdbcType="TINYINT" property="isOpen" />
+    <result column="paid_price" jdbcType="DECIMAL" property="paidPrice" />
+    <result column="service_status" jdbcType="TINYINT" property="serviceStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, park_code, order_num, plate_num, enter_time, exit_time, is_open, paid_price, service_status, create_time, update_time
+  </sql>
+  <select id="selectById" parameterType="com.icetech.paycenter.domain.autopay.AutopayOrder" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ice_autopay_order
+    <where>
+      <if test="id != null">id = #{id}</if>
+      <if test="parkCode != null">AND park_code = #{parkCode}</if>
+      <if test="orderNum != null">AND order_num = #{orderNum}</if>
+    </where>
+    LIMIT 1
+  </select>
+  <select id="selectInParkByPlateNum" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ice_autopay_order
+    where service_status=1 AND plate_num = #{plateNum}
+    ORDER BY id DESC
+    LIMIT 1
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from ice_autopay_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.icetech.paycenter.domain.autopay.AutopayOrder">
+    insert into ice_autopay_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="parkCode != null">
+        park_code,
+      </if>
+      <if test="orderNum != null">
+        order_num,
+      </if>
+      <if test="plateNum != null">
+        plate_num,
+      </if>
+      <if test="enterTime != null">
+        enter_time,
+      </if>
+      <if test="exitTime != null">
+        exit_time,
+      </if>
+      <if test="isOpen != null">
+        is_open,
+      </if>
+      <if test="paidPrice != null">
+        paid_price,
+      </if>
+      <if test="serviceStatus != null">
+        service_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="parkCode != null">
+        #{parkCode},
+      </if>
+      <if test="orderNum != null">
+        #{orderNum},
+      </if>
+      <if test="plateNum != null">
+        #{plateNum},
+      </if>
+      <if test="enterTime != null">
+        #{enterTime},
+      </if>
+      <if test="exitTime != null">
+        #{exitTime},
+      </if>
+      <if test="isOpen != null">
+        #{isOpen},
+      </if>
+      <if test="paidPrice != null">
+        #{paidPrice},
+      </if>
+      <if test="serviceStatus != null">
+        #{serviceStatus},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.icetech.paycenter.domain.autopay.AutopayOrder">
+    update ice_autopay_order
+    <set>
+      <if test="exitTime != null">
+        exit_time = #{exitTime},
+      </if>
+      <if test="isOpen != null">
+        is_open = #{isOpen},
+      </if>
+      <if test="paidPrice != null">
+        paid_price = #{paidPrice},
+      </if>
+      <if test="serviceStatus != null">
+        service_status = #{serviceStatus},
+      </if>
+    </set>
+    <where>
+      <if test="id != null">id = #{id}</if>
+      <if test="parkCode != null">AND park_code = #{parkCode}</if>
+      <if test="orderNum != null">AND order_num = #{orderNum}</if>
+    </where>
+  </update>
+
+  <update id="updateOpenStatusByPlateNum" parameterType="String">
+    update ice_autopay_order
+    SET is_open = 1
+    WHERE plate_num = #{plateNum} AND service_status=1
+  </update>
+</mapper>

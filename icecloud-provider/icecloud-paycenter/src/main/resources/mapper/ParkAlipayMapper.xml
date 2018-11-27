@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icetech.paycenter.mapper.ParkAlipayDao">
+  <resultMap id="BaseResultMap" type="com.icetech.paycenter.domain.ParkAlipay">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="park_code" jdbcType="VARCHAR" property="parkCode" />
+    <result column="app_id" jdbcType="VARCHAR" property="appId" />
+    <result column="partner_id" jdbcType="VARCHAR" property="partnerId" />
+    <result column="private_key" jdbcType="LONGVARCHAR" property="privateKey" />
+    <result column="ali_public_key" jdbcType="LONGVARCHAR" property="aliPublicKey" />
+    <result column="notify_url" jdbcType="VARCHAR" property="notifyUrl" />
+    <result column="return_url" jdbcType="VARCHAR" property="returnUrl" />
+    <result column="quit_url" jdbcType="VARCHAR" property="quitUrl" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, park_code, app_id, partner_id, private_key, ali_public_key,notify_url,return_url,quit_url, status, update_time,
+    update_user
+  </sql>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ice_park_alipay
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="selectByParkCode" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from ice_park_alipay
+      where park_code = #{parkCode}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from ice_park_alipay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.icetech.paycenter.domain.ParkAlipay">
+    insert into ice_park_alipay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parkCode != null">
+        park_code,
+      </if>
+      <if test="appId != null">
+        app_id,
+      </if>
+      <if test="partnerId != null">
+        partner_id,
+      </if>
+      <if test="privateKey != null">
+        private_key,
+      </if>
+      <if test="aliPublicKey != null">
+        ali_public_key,
+      </if>
+      <if test="notifyUrl != null">
+        notify_url,
+      </if>
+      <if test="returnUrl != null">
+        return_url,
+      </if>
+      <if test="quitUrl != null">
+        quit_url,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parkCode != null">
+        #{parkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null">
+        #{partnerId,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        #{privateKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aliPublicKey != null">
+        #{aliPublicKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notifyUrl != null">
+        #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="returnUrl != null">
+        #{returnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="quitUrl != null">
+        #{quitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.icetech.paycenter.domain.ParkAlipay">
+    update ice_park_alipay
+    <set>
+      <if test="parkCode != null">
+        park_code = #{parkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null">
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerId != null">
+        partner_id = #{partnerId,jdbcType=VARCHAR},
+      </if>
+      <if test="privateKey != null">
+        private_key = #{privateKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="aliPublicKey != null">
+        ali_public_key = #{aliPublicKey,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="notifyUrl != null">
+        notify_url = #{notifyUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="returnUrl != null">
+        return_url = #{returnUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="quitUrl != null">
+        quit_url = #{quitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

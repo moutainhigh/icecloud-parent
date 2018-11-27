@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icetech.paycenter.mapper.autopay.ParkUnionpayDao">
+  <resultMap id="BaseResultMap" type="com.icetech.paycenter.domain.autopay.ParkUnionpay">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="park_code" jdbcType="VARCHAR" property="parkCode" />
+    <result column="park_name" jdbcType="VARCHAR" property="parkName" />
+    <result column="mer_code" jdbcType="VARCHAR" property="merCode" />
+    <result column="out_parkcode" jdbcType="VARCHAR" property="outParkcode" />
+    <result column="secret_key" jdbcType="VARCHAR" property="secretKey" />
+    <result column="auto_pay_url" jdbcType="VARCHAR" property="autoPayUrl" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, park_code, park_name, mer_code, out_parkcode, secret_key,auto_pay_url, status, update_time, update_user
+  </sql>
+  <select id="selectById" parameterType="com.icetech.paycenter.domain.autopay.ParkUnionpay" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ice_park_unionpay
+    where status =1
+    <if test="parkCode != null">and park_code = #{parkCode}</if>
+    <if test="outParkcode != null">and out_parkcode = #{outParkcode}</if>
+    <if test="merCode != null">and mer_code = #{merCode}</if>
+    LIMIT 1
+  </select>
+  <select id="selectByParkCode" parameterType="com.icetech.paycenter.domain.autopay.ParkUnionpay" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ice_park_unionpay
+    where status =1 and park_code = #{parkCode}
+    LIMIT 1
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from ice_park_unionpay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.icetech.paycenter.domain.autopay.ParkUnionpay">
+    insert into ice_park_unionpay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="parkCode != null">
+        park_code,
+      </if>
+      <if test="parkName != null">
+        park_name,
+      </if>
+      <if test="merCode != null">
+        mer_code,
+      </if>
+      <if test="outParkcode != null">
+        out_parkcode,
+      </if>
+      <if test="secretKey != null">
+        secret_key,
+      </if>
+      <if test="autoPayUrl != null">
+        auto_pay_url,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="parkCode != null">
+        #{parkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parkName != null">
+        #{parkName,jdbcType=VARCHAR},
+      </if>
+      <if test="merCode != null">
+        #{merCode,jdbcType=VARCHAR},
+      </if>
+      <if test="outParkcode != null">
+        #{outParkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="secretKey != null">
+        #{secretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="autoPayUrl != null">
+        #{autoPayUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.icetech.paycenter.domain.autopay.ParkUnionpay">
+    update ice_park_unionpay
+    <set>
+      <if test="parkCode != null">
+        park_code = #{parkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parkName != null">
+        park_name = #{parkName,jdbcType=VARCHAR},
+      </if>
+      <if test="merCode != null">
+        mer_code = #{merCode,jdbcType=VARCHAR},
+      </if>
+      <if test="outParkcode != null">
+        out_parkcode = #{outParkcode,jdbcType=VARCHAR},
+      </if>
+      <if test="secretKey != null">
+        secret_key = #{secretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="autoPayUrl != null">
+        auto_pay_url = #{autoPayUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

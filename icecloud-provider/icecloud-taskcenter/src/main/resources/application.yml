@@ -1,0 +1,8 @@
+server:
+  port: 8006
+spring:
+  application:
+    name: @artifactId@
+mybatis:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+

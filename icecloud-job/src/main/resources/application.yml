@@ -1,0 +1,39 @@
+server:
+  port: 8080
+spring:
+  freemarker:
+    charset: UTF-8
+    request-context-attribute: request
+    templateLoaderPath: classpath:/templates/
+    suffix: .ftl
+  datasource:
+    url: jdbc:mysql://39.106.123.30:3306/xxl-job?Unicode=true&characterEncoding=UTF-8&useSSL=false
+    username: work
+    password: 1328ice@#
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    tomcat:
+      test-on-borrow: true
+      max-active: 30
+      max-wait: 10000
+  resources:
+    static-locations: classpath:/static/
+  mvc:
+    static-path-pattern: /static/**
+
+mybatis:
+  mapper-locations: classpath:/mybatis-mapper/*Mapper.xml
+xxl:
+  job:
+    mail:
+      password: asdfzxcv
+      port: 25
+      host: smtp.163.com
+      sendNick: ã\x80\x8aä»»å\x8a¡è°\x83åº¦å¹³å\x8f°XXL-JOBã\x80\x8b
+      ssl: false
+      username: ovono802302@163.com
+    login:
+      password: icetech123456
+      username: taskuser
+    accessToken:
+    i18n:

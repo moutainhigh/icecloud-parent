@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>icecloud-provider</artifactId>
+        <groupId>com.icetech</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>icecloud-cloudcenter</artifactId>
+    <description>云对接中心</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.icetech</groupId>
+            <artifactId>icecloud-cloudcenter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.icetech</groupId>
+            <artifactId>icecloud-datacenter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.icetech</groupId>
+            <artifactId>icecloud-paycenter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.icetech</groupId>
+            <artifactId>icecloud-transcenter-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>

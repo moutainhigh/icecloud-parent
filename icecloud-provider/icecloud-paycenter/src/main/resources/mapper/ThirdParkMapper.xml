@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icetech.paycenter.mapper.ThirdParkDao">
+    <resultMap id="BaseResultMap" type="com.icetech.paycenter.domain.ThirdPark">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="park_code" jdbcType="VARCHAR" property="parkCode"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, pid, park_code
+  </sql>
+    <select id="selectById" parameterType="com.icetech.paycenter.domain.ThirdPark" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ice_third_park
+        <where>
+            <if test="id != null">id = #{id,jdbcType=INTEGER}</if>
+            <if test="pid != null">AND pid = #{pid,jdbcType=VARCHAR}</if>
+            <if test="parkCode != null">AND park_code = #{parkCode,jdbcType=VARCHAR}</if>
+        </where>
+    </select>
+    <insert id="insert" parameterType="com.icetech.paycenter.domain.ThirdPark">
+        insert into ice_third_park
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="parkCode != null">
+               park_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="parkCode != null">
+                #{parkCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.icetech.paycenter.domain.ThirdPark">
+        update ice_third_park
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="parkCode != null">
+                park_code = #{parkCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <where>
+            <if test="id != null">id = #{id,jdbcType=INTEGER}</if>
+            <if test="pid != null">AND pid = #{pid,jdbcType=VARCHAR}</if>
+            <if test="parkCode != null">AND park_code = #{parkCode,jdbcType=VARCHAR}</if>
+        </where>
+    </update>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from ice_third_park
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+</mapper>

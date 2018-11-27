@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icetech.paycenter.mapper.AccountRecordDao">
+  <resultMap id="BaseResultMap" type="com.icetech.paycenter.domain.AccountRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="trade_date" jdbcType="DATE" property="tradeDate" />
+    <result column="trade_type" jdbcType="VARCHAR" property="tradeType" />
+    <result column="pay_scene" jdbcType="TINYINT" property="payScene" />
+    <result column="income" jdbcType="INTEGER" property="income" />
+    <result column="trade_no" jdbcType="VARCHAR" property="tradeNo" />
+    <result column="park_code" jdbcType="VARCHAR" property="parkCode" />
+    <result column="terminal_type" jdbcType="VARCHAR" property="terminalType" />
+    <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="center_seq_id" jdbcType="VARCHAR" property="centerSeqId" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="center_info" jdbcType="VARCHAR" property="centerInfo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, trade_date, trade_type, pay_scene, income, trade_no, park_code, terminal_type,
+    out_trade_no, center_seq_id, open_id, user_id, status, center_info,
+    create_time, update_time
+  </sql>
+  <select id="selectById" parameterType="com.icetech.paycenter.domain.AccountRecord" resultMap="BaseResultMap">
+      select
+        <include refid="Base_Column_List" />
+      from ice_account_record
+      <where>
+          <if test="id != null">id = #{id}</if>
+          <if test="parkCode != null">AND park_code = #{parkCode}</if>
+          <if test="tradeNo != null">AND trade_no = #{tradeNo}</if>
+      </where>
+      Limit 1
+  </select>
+  <select id="selectByParkCodeAndTradeNo" resultMap="BaseResultMap">
+      select
+        <include refid="Base_Column_List" />
+      from ice_account_record
+      where park_code=#{parkCode} and trade_no=#{tradeNo}
+      Limit 1
+  </select>
+
+  <select id="selectByOutTradeNo" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ice_account_record
+    where out_trade_no=#{outTradeNo}
+    Limit 1
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from ice_account_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.icetech.paycenter.domain.AccountRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into ice_account_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tradeDate != null">
+        trade_date,
+      </if>
+      <if test="tradeType != null">
+        trade_type,
+      </if>
+      <if test="payScene != null">
+        pay_scene,
+      </if>
+      <if test="income != null">
+        income,
+      </if>
+      <if test="tradeNo != null">
+        trade_no,
+      </if>
+      <if test="parkCode != null">
+        park_code,
+      </if>
+      <if test="terminalType != null">
+        terminal_type,
+      </if>
+      <if test="outTradeNo != null">
+        out_trade_no,
+      </if>
+      <if test="centerSeqId != null">
+        center_seq_id,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="centerInfo != null">
+        center_info,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="tradeDate != null">
+        #{tradeDate,jdbcType=DATE},
+      </if>
+      <if test="tradeType != null">
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="payScene != null">
+        #{payScene},
+      </if>
+      <if test="income != null">
+        #{income,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNo != null">
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parkCode != null">
+        #{parkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalType != null">
+        #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="centerSeqId != null">
+        #{centerSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="centerInfo != null">
+        #{centerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.icetech.paycenter.domain.AccountRecord">
+    update ice_account_record
+    <set>
+      <if test="tradeDate != null">
+        trade_date = #{tradeDate,jdbcType=DATE},
+      </if>
+      <if test="tradeType != null">
+        trade_type = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="payScene != null">
+        pay_scene = #{payScene},
+      </if>
+      <if test="income != null">
+        income = #{income,jdbcType=INTEGER},
+      </if>
+      <if test="tradeNo != null">
+        trade_no = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parkCode != null">
+        park_code = #{parkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalType != null">
+        terminal_type = #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="outTradeNo != null">
+        out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="centerSeqId != null">
+        center_seq_id = #{centerSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="centerInfo != null">
+        center_info = #{centerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+      <where>
+          <if test="id != null">id = #{id}</if>
+          <if test="parkCode != null">AND park_code = #{parkCode}</if>
+          <if test="tradeNo != null">AND trade_no = #{tradeNo}</if>
+      </where>
+  </update>
+</mapper>

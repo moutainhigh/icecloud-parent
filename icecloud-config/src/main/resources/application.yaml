@@ -1,0 +1,33 @@
+server:
+  port: 8782
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    config:
+      server:
+        git.uri: https://gitee.com/daqzi/icecloud-config.git
+        git.username: 18510664552
+        git.password: wzw1993.
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://icecloud-center:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
