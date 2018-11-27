@@ -27,6 +27,7 @@ spring cloud 全家桶项目
 │	│	│-com.icetech icecloud-tool-api ----------------	api
 │	│	│-com.icetech icecloud-web-api 	----------------	web中心
 │	│	│-com.icetech icecloud-taskcenter-api 	--------	任务
+
 ````
 #### 软件架构
 ![](https://i.loli.net/2018/11/06/5be125c737b2c.png)
