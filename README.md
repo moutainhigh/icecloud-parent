@@ -3,6 +3,7 @@
 #### 项目介绍
 spring cloud 全家桶项目
 #### 软件架构
+````
 │-com.icetech icecloud-parent	    --------------------	父及项目依赖
 │	│-com.icetech icecloud-config 	    ----------------	配置中心
 │	│-com.icetech icecloud-control	    ----------------	注册中心
@@ -26,6 +27,7 @@ spring cloud 全家桶项目
 │	│	│-com.icetech icecloud-tool-api ----------------	api
 │	│	│-com.icetech icecloud-web-api 	----------------	web中心
 │	│	│-com.icetech icecloud-taskcenter-api 	--------	任务
+````
 #### 软件架构
 ![](https://i.loli.net/2018/11/06/5be125c737b2c.png)
 #### 技术要点
